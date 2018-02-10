@@ -1,6 +1,9 @@
 require "middleman-core"
+require "middleman-journal/version"
+require "middleman-journal/extension"
+require "middleman-journal/commands/entry"
 
-Middleman::Extensions.register :middleman-journal do
-  require "my-extension/extension"
-  MyExtension
+Middleman::Extensions.register :journal do
+
+	JournalExtension
 end
