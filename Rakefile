@@ -11,15 +11,15 @@ end
 
 require 'rake/clean'
 
-task test: [ :spec ]
+task test: [:spec]
 
 require 'rspec/core/rake_task'
 
-desc "Run RSpec"
+desc 'Run RSpec'
 
-RSpec::Core::RakeTask.new do | spec |
+RSpec::Core::RakeTask.new do |spec|
   spec.pattern    = 'spec/**/*_spec.rb'
-  spec.rspec_opts = [ '--color', '--format documentation' ]
+  spec.rspec_opts = ['--color', '--format documentation']
 end
 
 task default: :test

@@ -1,7 +1,5 @@
 module Middleman
-
-	module Journal
-		VERSION = '0.0.1'
-	end
-
+  module Journal
+    VERSION = '0.0.1'.freeze
+  end
 end
