@@ -8,6 +8,7 @@ module Middleman
     #
     # @usage bundle exec middleman entry --help
     # @usage bundle exec middleman entry
+    # @usage bundle exec middleman entry [BULLET]
     #
     ##
     class Entry < ::Thor::Group
@@ -26,13 +27,6 @@ module Middleman
         @title = @date.strftime('%F')
         @slug = @date.strftime('%F')
 
-        app = ::Middleman::Application.new do
-          config[:mode]              = :config
-          config[:disable_sitemap]   = true
-          config[:watcher_disable]   = true
-          config[:exit_before_ready] = true
-        end
-
         template template_path, destination_path
       end
 
@@ -43,9 +37,16 @@ module Middleman
       end
 
       def destination_path
+        app = ::Middleman::Application.new do
+          config[:mode]              = :config
+          config[:disable_sitemap]   = true
+          config[:watcher_disable]   = true
+          config[:exit_before_ready] = true
+        end
+
         path = File.join(app.source_dir, 'journal', "#{@title}.html.markdown")
 
-        if File.exist?(absolute_entry_path)
+        if File.exist?(path)
           throw "An entry for #{@title} already exists: #{path}"
         end
 
